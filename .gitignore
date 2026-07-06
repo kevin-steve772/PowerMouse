@@ -1,0 +1,7 @@
+build/
+PowerMouse.exe
+*.o
+*.obj
+*.res
+.DS_Store
+Thumbs.db

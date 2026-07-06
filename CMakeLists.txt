@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.10)
+project(PowerMouse VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(WIN32)
+    add_executable(PowerMouse WIN32 main.cpp)
+    target_compile_definitions(PowerMouse PRIVATE _WIN32_WINNT=0x0600)
+    target_link_libraries(PowerMouse PRIVATE user32 gdi32 shell32)
+elseif(UNIX)
+    find_package(X11 REQUIRED)
+    find_package(Xtst REQUIRED)
+    add_executable(PowerMouse main.cpp)
+    target_include_directories(PowerMouse PRIVATE ${X11_INCLUDE_DIR})
+    target_link_libraries(PowerMouse PRIVATE ${X11_LIBRARIES} Xtst)
+endif()
